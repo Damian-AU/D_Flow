@@ -1,6 +1,9 @@
 ### By Damian Brakel ###
 proc show_editor { args } {
-    set_next_page off Dflowset; page_show off
+    ::D_Flow::prep
+    ::D_Flow::demo_graph
+    set_next_page off Dflowset
+    page_show off
 }
 
 set ::protected_d_flow_profiles {default {La Pavoni} Q}
