@@ -8,7 +8,7 @@ proc show_editor { args } {
 
 set ::protected_d_flow_profiles {default {La Pavoni} Q}
 variable author "Damian Brakel"
-variable version 4.0
+variable version 4.1
 
 ################# variables
 ### Info messages
@@ -1395,6 +1395,7 @@ dui add dbutton "settings_1" 1350 820 2530 1180 -tags La_Pavoni_notes_button -in
 
 rename ::update_de1_explanation_chart ::update_de1_explanation_chart_dflow
 proc ::update_de1_explanation_chart {} {
+    set ::settings(profile_editor) ""
     if {$::settings(settings_profile_type) == "settings_2a" || $::settings(settings_profile_type) == "settings_2b"} {
 	    ::D_Flow::hide_Q_demo_graph
         ::D_Flow::hide_La_Pavoni_demo_graph
@@ -1508,6 +1509,14 @@ proc show_d {args} {
             }
             dui page load Dflowset
         }
+        if {$title_test == "A-Flow /" } {
+            ::A_Flow::prep
+            ::A_Flow::demo_graph
+            if {$::settings(skin) == "DSx"} {
+                set ::settings(grinder_dose_weight) [round_to_one_digits $::DSx_settings(bean_weight)]
+            }
+            dui page load Aflowset
+        }
     }
 }
 proc set_editor {args} {
@@ -1515,10 +1524,14 @@ proc set_editor {args} {
     if {$title_test == "D-Flow /" } {
         set ::settings(profile_editor) D_Flow
     }
+    if {$title_test == "A-Flow /" } {
+        set ::settings(profile_editor) A_Flow
+    }
 }
 
 trace add execution show_settings {leave} ::D_Flow::show_d
 trace add execution select_profile {leave} ::D_Flow::set_editor
+trace add execution show_original_profile_editor {leave} ::D_Flow::show_d
 
 rename ::plugins::list ::plugins::list_dflow
 proc ::plugins::list {args} {
