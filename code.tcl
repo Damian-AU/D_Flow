@@ -8,7 +8,7 @@ proc show_editor { args } {
 
 set ::protected_d_flow_profiles {default {La Pavoni} Q}
 variable author "Damian Brakel"
-variable version 4.1
+variable version 4.2
 
 ################# variables
 ### Info messages
@@ -1182,9 +1182,9 @@ dui add dbutton settings_1 1100 526 \
     -bwidth 200 -bheight 200 -tags new_profile_button -initial_state hidden \
     -command {
         set title_test [string range [ifexists ::settings(profile_title)] 0 7]
-        if {$title_test == "A-Flow /" && [info commands ::plugins::A_Flow::prep] ne ""} {
-            ::plugins::A_Flow::prep
-            ::plugins::A_Flow::demo_graph
+        if {$title_test == "A-Flow /" && [info commands ::A_Flow::prep] ne ""} {
+            ::A_Flow::prep
+            ::A_Flow::demo_graph
             if {$::settings(skin) == "DSx"} {
                 set ::settings(grinder_dose_weight) [round_to_one_digits $::DSx_settings(bean_weight)]
             }
