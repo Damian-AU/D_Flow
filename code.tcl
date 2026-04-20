@@ -8,7 +8,7 @@ proc show_editor { args } {
 
 set ::protected_d_flow_profiles {default {La Pavoni} Q}
 variable author "Damian Brakel"
-variable version 4.2
+variable version 4.3
 
 ################# variables
 ### Info messages
@@ -1143,9 +1143,9 @@ dui add dbutton "settings_1 settings_3 settings_4" 642 0 1277 188 \
             -labelvariable {} -label_font [dui font get $font 12] -label_fill $font_colour -label_pos {0.5 0.5} \
             -command {
             set title_test [string range [ifexists ::settings(profile_title)] 0 7]
-            if {$title_test == "A-Flow /" && [info commands ::plugins::A_Flow::prep] ne ""} {
-                ::plugins::A_Flow::prep
-                ::plugins::A_Flow::demo_graph
+            if {$title_test == "A-Flow /" && [info commands ::A_Flow::prep] ne ""} {
+                ::A_Flow::prep
+                ::A_Flow::demo_graph
                 if {$::settings(skin) == "DSx"} {
                     set ::settings(grinder_dose_weight) [round_to_one_digits $::DSx_settings(bean_weight)]
                 }
@@ -1204,9 +1204,9 @@ dui add dbutton "settings_1" 1330 220 \
     -labelvariable {} -label_font [dui font get $font 12] -label_fill $font_colour -label_pos {0.5 0.5} \
     -command {
     set title_test [string range [ifexists ::settings(profile_title)] 0 7]
-    if {$title_test == "A-Flow /" && [info commands ::plugins::A_Flow::prep] ne ""} {
-        ::plugins::A_Flow::prep
-        ::plugins::A_Flow::demo_graph
+    if {$title_test == "A-Flow /" && [info commands ::A_Flow::prep] ne ""} {
+        ::A_Flow::prep
+        ::A_Flow::demo_graph
         if {$::settings(skin) == "DSx"} {
             set ::settings(grinder_dose_weight) [round_to_one_digits $::DSx_settings(bean_weight)]
         }
@@ -1241,9 +1241,9 @@ add_de1_widget "settings_1c" graph 1330 300 {
     $::preview_graph_advanced axis configure y -color #5a5d75 -tickfont Helv_6 -min 0.0 -max 12 -majorticks {1 2 3 4 5 6 7 8 9 10 11 12} -title [translate "Advanced"] -titlefont Helv_8 -titlecolor #5a5d75;
     bind $::preview_graph_advanced [platform_button_press] {
         set title_test [string range [ifexists ::settings(profile_title)] 0 7]
-        if {$title_test == "A-Flow /" && [info commands ::plugins::A_Flow::prep] ne ""} {
-            ::plugins::A_Flow::prep
-            ::plugins::A_Flow::demo_graph
+        if {$title_test == "A-Flow /" && [info commands ::A_Flow::prep] ne ""} {
+            ::A_Flow::prep
+            ::A_Flow::demo_graph
             if {$::settings(skin) == "DSx"} {
                 set ::settings(grinder_dose_weight) [round_to_one_digits $::DSx_settings(bean_weight)]
             }
